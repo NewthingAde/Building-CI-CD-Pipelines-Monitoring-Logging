@@ -175,7 +175,8 @@ jobs:
           paths:
             - project/.circleci/ansible/inventory.txt
       
-      - destroy-environment
+      - destroy-environment:
+          workflow_id: ${CIRCLE_WORKFLOW_ID}
 
   configure-infrastructure:
     docker:
@@ -203,7 +204,8 @@ jobs:
             cd .circleci/ansible/
             ansible-playbook configure-server.yml -i inventory.txt
 
-      - destroy-environment
+      - destroy-environment:
+          workflow_id: ${CIRCLE_WORKFLOW_ID}
 
   run-migrations:
     docker:
@@ -235,7 +237,6 @@ jobs:
 
       - image: amazon/aws-cli
     steps:
-      # Checkout code from git
       - checkout
       - run:
           name: Install dependencies
@@ -261,8 +262,10 @@ jobs:
             npm run build
             aws s3 sync dist s3://udapeople-${CIRCLE_WORKFLOW_ID}
       # Here's where you will add some code to rollback on failure
-      - revert-migrations
-      - destroy-environment
+      - revert-migrations:
+          workflow_id: ${CIRCLE_WORKFLOW_ID}
+      - destroy-environment:
+          workflow_id: ${CIRCLE_WORKFLOW_ID}
          
 
   deploy-backend:
@@ -305,8 +308,10 @@ jobs:
             tar -C ~/project/backend -czvf ~/project/artifact.tar.gz .
             ansible-playbook -i ~/inventory.txt ~/project/.circleci/ansible/deploy-backend.yml
       # Here's where you will add some code to rollback on failure
-      - revert-migrations
-      - destroy-environment
+      - revert-migrations:
+          workflow_id: ${CIRCLE_WORKFLOW_ID}
+      - destroy-environment:
+          workflow_id: ${CIRCLE_WORKFLOW_ID}
   
   smoke-test:
     docker: 
@@ -341,7 +346,8 @@ jobs:
             else
               exit 1
             fi
-      - destroy-environment
+      - destroy-environment:
+          workflow_id: ${CIRCLE_WORKFLOW_ID}
 
 
 
