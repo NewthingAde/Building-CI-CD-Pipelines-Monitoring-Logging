@@ -8,3 +8,8 @@
 ### Test Failed
 
 <img width="1404" alt="Screenshot 2022-06-20 at 11 04 54" src="https://user-images.githubusercontent.com/80678596/174566621-d2ab1c17-32e1-4161-89c6-7fae405b46cf.png">
+
+
+### Alert
+
+<img width="1163" alt="Screenshot 2022-06-20 at 11 47 15" src="https://user-images.githubusercontent.com/80678596/174575151-5e556294-c855-4fa1-8994-43e437d6c625.png">
