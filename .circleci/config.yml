@@ -286,102 +286,61 @@ jobs:
       - destroy-environment:
           to: "FE"
   
-  
-  deploy-backend:
+  deploy-backend: 
     docker:
-      # Docker image here that supports Ansible
       - image: python:3.7-alpine3.11
     steps:
       - checkout
       - add_ssh_keys:
-          fingerprints:
-            - "f1:87:92:e4:12:ee:f0:5f:88:32:7e:a7:7a:b0:38:d7"
+          fingerprints: ["f1:87:92:e4:12:ee:f0:5f:88:32:7e:a7:7a:b0:38:d7"]
+
       - attach_workspace:
           at: ~/
+
       - run:
           name: Install dependencies
-          command: |
-            apk add --update tar gzip ansible nodejs npm curl
+          command: |  
+            pip install --upgrade pip
             pip install awscli
-      - run:
-          name: Setup environment variables
-          command: |
-            echo ENVIRONMENT=production > backend/.env
-            echo NODE_ENV=production >> backend/.env
-            echo TYPEORM_CONNECTION=postgres >> backend/.env
-            echo TYPEORM_MIGRATIONS_DIR=./src/migrations >> backend/.env
-            echo TYPEORM_ENTITIES=./src/modules/domain/**/*.entity.ts >> backend/.env
-            echo TYPEORM_MIGRATIONS=./src/migrations/*.ts >> backend.env
-            echo TYPEORM_HOST=${TYPEORM_HOST} >> backend/.env
-            echo TYPEORM_PORT=${TYPEORM_PORT} >> backend/.env
-            echo TYPEORM_USERNAME=${TYPEORM_USERNAME} >> backend/.env
-            echo TYPEORM_PASSWORD=${TYPEORM_PASSWORD} >> backend/.env
-            echo TYPEORM_DATABASE=${TYPEORM_DATABASE} >> backend/.env
-            cat backend/.env
+            apk add --update nodejs npm ansible zip
       - run:
           name: Deploy backend
-          no_output_timeout: 30m
           command: |
-            cd ~/project/backend
-            npm install
-            tar -C ~/project/backend -czvf ~/project/artifact.tar.gz .
-            cat ~/inventory.txt
-            ansible-playbook -i ~/inventory.txt ~/project/.circleci/ansible/deploy-backend.yml
-  #deploy-backend: 
-  #  docker:
-  #    - image: python:3.7-alpine3.11
-  #  steps:
-  #    - checkout
-  #    - add_ssh_keys:
-  #        fingerprints: ["f1:87:92:e4:12:ee:f0:5f:88:32:7e:a7:7a:b0:38:d7"]
-
-  #    - attach_workspace:
-  #        at: ~/
-
-  #    - run:
-  #        name: Install dependencies
-  #        command: |  
-  #          pip install --upgrade pip
-  #          pip install awscli
-  #          apk add --update nodejs npm ansible zip
-  #    - run:
-  #        name: Deploy backend
-  #        command: |
-  #            cd backend
-  #            apk add --update nodejs-npm
-  #            npm install
-  #            npm run build
-  #            echo build successful
-  #    - run:
-  #        name: Add env vars
-  #        command: |
-  #            echo ENVIROMENT=production > "backend/dist/.env"
-  #            echo TYPEORM_CONNECTION=postgres >> "backend/dist/.env"
-  #            echo TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js} >> "backend/dist/.env"
-  #            echo TYPEORM_HOST=$TYPEORM_HOST >> "backend/dist/.env"
-  #            echo TYPEORM_PORT=$TYPEORM_PORT >> "backend/dist/.env"
-  #            echo TYPEORM_USERNAME=$TYPEORM_USERNAME >> "backend/dist/.env"
-  #            echo TYPEORM_MIGRATIONS=$TYPEORM_MIGRATIONS >> "backend/dist/.env"
-  #            echo TYPEORM_MIGRATIONS_DIR=$TYPEORM_MIGRATIONS_DIR >> "backend/dist/.env"
-  #            echo TYPEORM_PASSWORD=$TYPEORM_PASSWORD >> "backend/dist/.env"
-  #            echo TYPEORM_DATABASE=$TYPEORM_DATABASE >> "backend/dist/.env"
-  #    - run:
-  #        name: Configure server
-  #        command: |    
-  #            cd /root/project/backend/dist
-  #            tar czf dist.tar.gz .
-  #            mkdir -p ~/project/.circleci/ansible/roles/deploy/files/
-  #            mv dist.tar.gz ~/project/.circleci/ansible/roles/deploy/files/
-  #            cd /root/project/backend/node_modules
-  #            tar czf node_modules.tar.gz .
-  #            mv node_modules.tar.gz ~/project/.circleci/ansible/roles/deploy/files/
-  #    - run:
-  #        name: Run Ansible
-  #        command: |
-  #          cd /root/project/.circleci/ansible
-  #            echo "Contents  of the inventory.txt file is _____________________________________>>"
-  #            cat inventory.txt
-  #            ansible-playbook deploy-backend.yml -i inventory.txt
+              cd backend
+              apk add --update nodejs-npm
+              npm install
+              npm run build
+              echo build successful
+      - run:
+          name: Add env vars
+          command: |
+              echo ENVIROMENT=production > "backend/dist/.env"
+              echo TYPEORM_CONNECTION=postgres >> "backend/dist/.env"
+              echo TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js} >> "backend/dist/.env"
+              echo TYPEORM_HOST=$TYPEORM_HOST >> "backend/dist/.env"
+              echo TYPEORM_PORT=$TYPEORM_PORT >> "backend/dist/.env"
+              echo TYPEORM_USERNAME=$TYPEORM_USERNAME >> "backend/dist/.env"
+              echo TYPEORM_MIGRATIONS=$TYPEORM_MIGRATIONS >> "backend/dist/.env"
+              echo TYPEORM_MIGRATIONS_DIR=$TYPEORM_MIGRATIONS_DIR >> "backend/dist/.env"
+              echo TYPEORM_PASSWORD=$TYPEORM_PASSWORD >> "backend/dist/.env"
+              echo TYPEORM_DATABASE=$TYPEORM_DATABASE >> "backend/dist/.env"
+      - run:
+          name: Configure server
+          command: |    
+              cd /root/project/backend/dist
+              tar czf dist.tar.gz .
+              mkdir -p ~/project/.circleci/ansible/roles/deploy/files/
+              mv dist.tar.gz ~/project/.circleci/ansible/roles/deploy/files/
+              cd /root/project/backend/node_modules
+              tar czf node_modules.tar.gz .
+              mv node_modules.tar.gz ~/project/.circleci/ansible/roles/deploy/files/
+      - run:
+          name: Run Ansible
+          command: |
+            cd /root/project/.circleci/ansible
+              echo "Contents  of the inventory.txt file is _____________________________________>>"
+              cat inventory.txt
+              ansible-playbook deploy-backend.yml -i inventory.txt
       - destroy-environment:
           to: "backend"
   
