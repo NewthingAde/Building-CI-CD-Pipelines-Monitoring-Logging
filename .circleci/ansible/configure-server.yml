@@ -21,8 +21,7 @@
 
   roles:
     - configure-server
-
-    
+ 
   environment:
     ENVIRONMENT: production
     CIRCLE_WORKFLOW_ID: "{{ lookup('env','CIRCLE_WORKFLOW_ID') }}"
