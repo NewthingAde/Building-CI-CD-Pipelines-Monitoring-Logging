@@ -1,5 +1,4 @@
 version: 2.1
-
 commands:
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
@@ -29,7 +28,6 @@ commands:
                 aws cloudformation delete-stack \
                 --stack-name udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7} 
               fi
-
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.
     parameters:
@@ -40,7 +38,6 @@ commands:
           name: Revert migrations
           when: on_fail
           command: |
-
             SUCCESS=$curl https://kvdb.io/Nucr3yB6RM75Sz5neM8QEo/migration_${CIRCLE_WORKFLOW_ID:0:7}
             echo ${SUCCESS}
             if [[ ${SUCCESS} -eq 1 ]];
@@ -49,8 +46,6 @@ commands:
               npm install
               npm run migrations:revert
             fi
-
-
 jobs:
   build-frontend:
     docker:
@@ -68,7 +63,6 @@ jobs:
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
-
   build-backend:
     docker:
       - image: circleci/node:13.8.0
@@ -86,7 +80,6 @@ jobs:
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
-
   test-frontend:
     docker:
       - image: circleci/node:13.8.0
@@ -101,7 +94,6 @@ jobs:
             sudo apt install nodejs
             npm install
             npm run test
-
   test-backend:
     docker:
       - image: circleci/node:13.8.0
@@ -116,7 +108,6 @@ jobs:
             sudo apt install nodejs
             npm install
             npm run test  
-
   scan-frontend:
     docker:
       - image: circleci/node:13.8.0
@@ -130,7 +121,6 @@ jobs:
             cd frontend
             npm i
             npm audit fix --audit-level=critical --force
-
   scan-backend:
     docker:
       - image: circleci/node:13.8.0
@@ -147,7 +137,6 @@ jobs:
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build 
-
   deploy-infrastructure:
     docker:
       - image: amazon/aws-cli
@@ -191,7 +180,6 @@ jobs:
             - project/.circleci/ansible/inventory.txt
       
       - destroy-environment
-
   configure-infrastructure:
     docker:
       - image: python:3.7-alpine3.11
@@ -217,9 +205,7 @@ jobs:
           command: |
             cd .circleci/ansible/
             ansible-playbook configure-server.yml -i inventory.txt
-
       - destroy-environment
-
   run-migrations:
     docker:
       - image: circleci/node:14.18.1
@@ -244,7 +230,6 @@ jobs:
               curl https://kvdb.io/Nucr3yB6RM75Sz5neM8QEo/migration_${CIRCLE_WORKFLOW_ID:0:7} -d '1'
             fi
       - destroy-environment
-
   deploy-frontend:
     docker:
       - image: amazon/aws-cli
@@ -278,15 +263,13 @@ jobs:
       - run:
           name: Deploy frontend objects
           command: |
-            aws s3 cp ./frontend/dist "s3://udapeople-123rewqwert" --recursive
+            aws s3 cp ./frontend/dist "s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7}" --recursive
       - persist_to_workspace:
           root: .
           paths:
             - ./frontend/dist 
       - destroy-environment:
           to: "FE"
-  
-  
   deploy-backend: 
     docker:
       - image: python:3.7-alpine3.11
@@ -294,10 +277,8 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints: ["f1:87:92:e4:12:ee:f0:5f:88:32:7e:a7:7a:b0:38:d7"]
-
       - attach_workspace:
           at: ~/
-
       - run:
           name: Install dependencies
           command: |  
@@ -380,10 +361,7 @@ jobs:
             else
               return 1
             fi
-      - destroy-environment:
-          to: "backend"
-
-
+      - destroy-environment
 workflows:
   default:
     jobs:
@@ -412,6 +390,3 @@ workflows:
           requires: [configure-infrastructure]
       - smoke-test:
           requires: [deploy-backend, deploy-frontend]
-
-
-          
