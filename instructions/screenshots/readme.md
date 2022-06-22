@@ -30,3 +30,23 @@
 ### Cloudfront update 
 
 <img width="1420" alt="Screenshot 2022-06-22 at 16 56 59" src="https://user-images.githubusercontent.com/80678596/175062082-ccf5a890-f2ee-4c13-bb42-a48a281a8369.png">
+
+
+### Clean Up 
+
+<img width="1420" alt="Screenshot 2022-06-22 at 17 31 32" src="https://user-images.githubusercontent.com/80678596/175071737-3d5fda3b-f344-4543-b9a3-af550ea508f1.png">
+
+
+### Circleci dev pipeline
+
+<img width="1440" alt="Screenshot 2022-06-22 at 18 41 38" src="https://user-images.githubusercontent.com/80678596/175091714-d311389d-d8c8-430e-b962-c17c78908f9b.png">
+
+### Circleci pipeline
+<img width="1438" alt="Screenshot 2022-06-22 at 18 42 55" src="https://user-images.githubusercontent.com/80678596/175091924-5ff9189a-fb5b-4724-801c-842ad5c63a49.png">
+
+
+
+
+### Frontend 
+
+<img width="1436" alt="Screenshot 2022-06-22 at 17 37 41" src="https://user-images.githubusercontent.com/80678596/175073177-6eec476e-2dba-4460-a69a-d794da518e5c.png">
