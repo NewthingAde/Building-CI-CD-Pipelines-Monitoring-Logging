@@ -20,4 +20,11 @@
 
 ### Smoke Test
 
-<img width="1431" alt="Screenshot 2022-06-22 at 11 48 31" src="https://user-images.githubusercontent.com/80678596/174999430-b828aea7-2298-40a0-a47f-63fd509b013e.png">
+<img width="1420" alt="Screenshot 2022-06-22 at 14 18 18" src="https://user-images.githubusercontent.com/80678596/175027176-2a8e2271-fee4-4f36-978f-7345530c7528.png">
+
+### Destroy Environment
+
+<img width="1424" alt="Screenshot 2022-06-22 at 14 15 01" src="https://user-images.githubusercontent.com/80678596/175027684-dff64ef3-b4aa-4bf3-92cb-dac5de8fa9f1.png">
+
+
+### 
