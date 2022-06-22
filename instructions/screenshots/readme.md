@@ -18,7 +18,7 @@
 
 <img width="1440" alt="Screenshot 2022-06-20 at 15 43 00" src="https://user-images.githubusercontent.com/80678596/174615031-552a4006-0a1e-465b-bc92-ebcde5d5a77e.png">
 
-### Smoke Test
+###  Frontend Smoke Test
 
 <img width="1420" alt="Screenshot 2022-06-22 at 14 18 18" src="https://user-images.githubusercontent.com/80678596/175027176-2a8e2271-fee4-4f36-978f-7345530c7528.png">
 
@@ -27,4 +27,6 @@
 <img width="1424" alt="Screenshot 2022-06-22 at 14 15 01" src="https://user-images.githubusercontent.com/80678596/175027684-dff64ef3-b4aa-4bf3-92cb-dac5de8fa9f1.png">
 
 
-### 
+### Cloudfront update 
+
+<img width="1420" alt="Screenshot 2022-06-22 at 16 56 59" src="https://user-images.githubusercontent.com/80678596/175062082-ccf5a890-f2ee-4c13-bb42-a48a281a8369.png">
