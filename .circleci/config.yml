@@ -45,9 +45,8 @@ commands:
               cd ~/project/backend
               npm install
               npm run migrations:revert
- 
             fi
-
+            echo "MIGRATION NOT REVERTED"
 jobs:
   build-frontend:
     docker:
@@ -259,7 +258,9 @@ jobs:
             cd backend
             npm install
             npm run build
+
       - revert-migrations
+      
       - run:
           name: Run Migration
           command: |
