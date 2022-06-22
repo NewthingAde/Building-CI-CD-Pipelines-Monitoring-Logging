@@ -375,21 +375,11 @@ jobs:
       - run:
           name: Update cloudfront distribution
           command: |
-              export OldWorkflow=$(aws cloudformation \
-                  list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
-                  --no-paginate --output text)
-
-              echo $OldWorkflow >> ~/OldWorkflow.txt
-
-              cat~/OldWorkflow.txt
-      - run:
-          name: Update cloudfront distribution
-          command: |
-            aws cloudformation update-stack \
-              --use-previous-template \
+            aws cloudformation deploy \
+              --template-file .circleci/files/cloudfront.yml \
               --stack-name InitialStack \
-              --parameters ParameterKey=123rewqwert,ParameterValue=${CIRCLE_WORKFLOW_ID:0:7},UsePreviousValue=false
-
+              --parameter-overrides WorkflowID="udapeople-123rewqwert" \
+              --tags project=udapeople
       - destroy-environment
 
 
