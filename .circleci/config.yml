@@ -28,24 +28,44 @@ commands:
                 aws cloudformation delete-stack \
                 --stack-name udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7} 
               fi
+ # revert-migrations:
+ #   description: Revert the last migration if successfully run in the current workflow.
+ #   parameters:
+ #     workflow_id:
+ #       type: string
+ #   steps:
+ #     - run:
+ #         name: Revert migrations
+ #         when: on_fail
+ #         command: |
+ #           SUCCESS=$curl https://kvdb.io/Nucr3yB6RM75Sz5neM8QEo/migration_${CIRCLE_WORKFLOW_ID:0:7}
+ #           echo ${SUCCESS}
+ #           if [[ ${SUCCESS} -eq 1 ]];
+ #           then
+ #             cd ~/project/backend
+ #             npm install
+ #             npm run migrations:revert
+ #
+ #           fi
   revert-migrations:
-    description: Revert the last migration if successfully run in the current workflow.
-    parameters:
-      workflow_id:
-        type: string
+    description: Revert the last migration if successfully run in the current workflow.    
     steps:
       - run:
           name: Revert migrations
           when: on_fail
+          # Add when this will run
           command: |
+        
             SUCCESS=$curl https://kvdb.io/Nucr3yB6RM75Sz5neM8QEo/migration_${CIRCLE_WORKFLOW_ID:0:7}
-            echo ${SUCCESS}
-            if [[ ${SUCCESS} -eq 1 ]];
+            if(( $SUCCESS==1 )); 
             then
               cd ~/project/backend
               npm install
               npm run migrations:revert
+            ss  
             fi
+
+
 jobs:
   build-frontend:
     docker:
@@ -206,30 +226,67 @@ jobs:
             cd .circleci/ansible/
             ansible-playbook configure-server.yml -i inventory.txt
       - destroy-environment
+
+
   run-migrations:
     docker:
-      - image: circleci/node:14.18.1
+      - image: circleci/node:13.8.0
+      
     steps:
       - checkout
       - restore_cache:
-          keys: [backend-build-cache]
+          keys: [backend-build]
       - run:
-          name: Run database migration
+          name: Install AWS CLI dependencies
+          command: |
+              sudo apt-get update && sudo apt-get install -yy less
+              curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+              unzip awscliv2.zip
+              sudo ./aws/install
+        
+      - run:
+          name: Run migrations
           command: |
             cd backend
             npm install
-            echo "run migration ..."
-            npm run migrations > migrations_dump.txt
-            echo "migrations dump content ..."
-            cat migrations_dump.txt
+            npm run build
+            npm run migrations >> db_success.txt      
       - run:
-          name: Send database migration status to kvdb.io
+          name: Send migration results to memstash
           command: |
-            if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
-            then
-              curl https://kvdb.io/Nucr3yB6RM75Sz5neM8QEo/migration_${CIRCLE_WORKFLOW_ID:0:7} -d '1'
-            fi
-      - destroy-environment
+              if (( grep has been executed successfully db_success.txt ))  
+              then
+                  curl https://kvdb.io/Nucr3yB6RM75Sz5neM8QEo/migration_${CIRCLE_WORKFLOW_ID:0:7} -d '1'
+              else
+                  curl https://kvdb.io/Nucr3yB6RM75Sz5neM8QEo/migration_${CIRCLE_WORKFLOW_ID:0:7} -d '0'
+              fi
+              
+      - revert-migrations   
+ # run-migrations:
+ #   docker:
+ #     - image: circleci/node:14.18.1
+ #   steps:
+ #     - checkout
+ #     - restore_cache:
+ #         keys: [backend-build-cache]
+ #     - run:
+ #         name: Run database migration
+ #         command: |
+ #           cd backend
+ #           npm install
+ #           echo "run migration ..."
+ #           npm run migrations > migrations_dump.txt
+ #           echo "migrations dump content ..."
+ #           cat migrations_dump.txt
+ #     - run:
+ #         name: Send database migration status to kvdb.io
+ #         command: |
+ #           if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
+ #           then
+ #             curl https://kvdb.io/Nucr3yB6RM75Sz5neM8QEo/migration_${CIRCLE_WORKFLOW_ID:0:7} -d '1'
+ #           fi
+ #     - destroy-environment
+ 
   deploy-frontend:
     docker:
       - image: amazon/aws-cli
@@ -353,7 +410,7 @@ jobs:
       - run:
           name: FE smoke test.
           command: |
-            URL="http://udapeople-123rewqwert.s3-website-us-west-1.amazonaws.com"
+            URL="http://udapeople-123rewqwert.s3-website-us-east-1.amazonaws.com"
             echo ${URL}
             if curl -s ${URL} | grep "Welcome"
             then
@@ -361,7 +418,7 @@ jobs:
             else
               return 1
             fi
-     # - destroy-environment
+      - destroy-environment
 workflows:
   default:
     jobs:

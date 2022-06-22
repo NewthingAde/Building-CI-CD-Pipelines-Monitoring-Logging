@@ -17,3 +17,7 @@
 ### Deploy Infrastructure
 
 <img width="1440" alt="Screenshot 2022-06-20 at 15 43 00" src="https://user-images.githubusercontent.com/80678596/174615031-552a4006-0a1e-465b-bc92-ebcde5d5a77e.png">
+
+### Smoke Test
+
+<img width="1431" alt="Screenshot 2022-06-22 at 11 48 31" src="https://user-images.githubusercontent.com/80678596/174999430-b828aea7-2298-40a0-a47f-63fd509b013e.png">
