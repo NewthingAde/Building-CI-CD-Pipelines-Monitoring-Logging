@@ -1,3 +1,4 @@
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/NewthingAde/Building-CI-CD-Pipelines-Monitoring-Logging/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/NewthingAde/Building-CI-CD-Pipelines-Monitoring-Logging/tree/main)
 
 ## Give your Application Auto-Deploy Superpowers
 

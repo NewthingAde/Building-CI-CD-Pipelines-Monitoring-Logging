@@ -50,3 +50,22 @@
 ### Frontend 
 
 <img width="1436" alt="Screenshot 2022-06-22 at 17 37 41" src="https://user-images.githubusercontent.com/80678596/175073177-6eec476e-2dba-4460-a69a-d794da518e5c.png">
+
+
+
+### Prometheus
+
+<img width="1440" alt="Screenshot 2022-06-22 at 20 31 55" src="https://user-images.githubusercontent.com/80678596/175111665-1b528383-d674-420d-a357-8f4b79184278.png">
+
+### Node free memory
+
+<img width="1434" alt="Screenshot 2022-06-22 at 20 36 12" src="https://user-images.githubusercontent.com/80678596/175111569-49614ae8-b278-4d5d-ad85-eaf0cfe8591a.png">
+
+### Node Cpu memory
+
+<img width="1434" alt="Screenshot 2022-06-22 at 20 40 05" src="https://user-images.githubusercontent.com/80678596/175112241-a7a0d216-378e-410f-98d8-30ce05e246de.png">
+
+### Node disk usage
+
+<img width="1434" alt="Screenshot 2022-06-22 at 20 40 05" src="https://user-images.githubusercontent.com/80678596/175112241-a7a0d216-378e-410f-98d8-30ce05e246de.png">
+
