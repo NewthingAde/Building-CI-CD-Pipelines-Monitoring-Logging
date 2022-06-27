@@ -5,6 +5,10 @@ https://github.com/NewthingAde/Building-CI-CD-Pipelines-Monitoring-Logging
 URL 02
 http://udapeople-123rewqwert.s3-website-us-east-1.amazonaws.com
 
+URL to Video
+https://www.youtube.com/watch?v=WCAHm2k_xDk
+
+
 
 URL 4
 http://3.86.208.70:3030/api/status
