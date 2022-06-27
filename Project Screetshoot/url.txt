@@ -10,11 +10,11 @@ https://www.youtube.com/watch?v=WCAHm2k_xDk
 
 URL 03 (cloudfront)
 
-https://d368vaf9vooy6.cloudfront.net/#/employees
+http://d368vaf9vooy6.cloudfront.net/#/employees/new
 
 URL 4
 http://3.86.208.70:3030/api/status
 
 
 URL 5 (Prometheus endpoint)
-http://ec2-34-230-47-239.compute-1.amazonaws.com:9090/targets
+http://ec2-54-159-192-236.compute-1.amazonaws.com:9090/targets
