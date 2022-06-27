@@ -1,0 +1,14 @@
+
+URL 01
+https://github.com/NewthingAde/Building-CI-CD-Pipelines-Monitoring-Logging
+
+URL 02
+http://udapeople-123rewqwert.s3-website-us-east-1.amazonaws.com
+
+
+URL 4
+http://3.86.208.70:3030/api/status
+
+
+URL 5 (Prometheus endpoint)
+http://ec2-34-230-47-239.compute-1.amazonaws.com:9090/targets
