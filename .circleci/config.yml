@@ -373,6 +373,7 @@ jobs:
       - destroy-environment
       - revert-migrations:
           workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"   
+  
   cloudfront-update:
     docker:
       - image: amazon/aws-cli
@@ -381,14 +382,12 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            # your code here
             yum update -y
             yum install -y curl
             aws --version
       - run:
           name: Update cloudfront distribution
           command: |
-            # your code here
             export OldWorkflowID=$(aws cloudformation list-exports --query "Exports[?Name==\`WorkflowID\`].Value" --no-paginate --output text)
   
             echo $OldWorkflowID >> ~/OldWorkflowID.txt
@@ -411,10 +410,8 @@ jobs:
   
   cleanup:
     docker:
-      # Docker image here
       - image: amazon/aws-cli
     steps:
-      # Checkout code from git
       - checkout
       - run:
           name: Get old stack workflow id
