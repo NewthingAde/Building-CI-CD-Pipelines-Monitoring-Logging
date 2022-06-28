@@ -2,24 +2,24 @@
 
 
 # Getting Started 
-- ###### What Is Continuous Integration, Delivery and Deployment?
+- ### What Is Continuous Integration, Delivery and Deployment?
 
 Every employee must take responsibility for continuous improvements to products, services, and processes for an organisation to be effective. Improvements can reduce errors or waste, add value or safety, or address issues that slow down or irritate users.
 
 Companies will occasionally engage in significant improvement projects, but a continuous improvement mindset means that a professional is always looking for and acting on even the smallest opportunities for improvement. Even when things are going well, a professional always looks for ways to improve.
-- ###### Continuous Integration
+- ### Continuous Integration
 
 ![1_YJjbmjj9UkDv1gleLsEtZw](https://user-images.githubusercontent.com/80678596/176104462-2f6b5c58-7894-43d6-9bd3-7d560d686a55.png)
 
 Continuous integration allows development teams to quickly integrate code changes into a shared storage space. Along with automated versioning and pre-integration testing, this capability ensures that only fully functional application code is available for distribution.
-- ###### Continuous Deployment
+- ### Continuous Deployment
 
 ![cicdcd](https://user-images.githubusercontent.com/80678596/176104640-2c720cf2-efb0-4d00-92a1-6597c92a301d.png)
 
 Continuous deployment is a software release strategy in which any code commit that passes the automated testing phase is automatically released into the production environment, resulting in visible changes to the software's users.
 
 
-- ###### Continuous Delivery
+- ### Continuous Delivery
 
 ![what-is-continuous-delivery](https://user-images.githubusercontent.com/80678596/176105234-72a2947d-ae4d-42d1-942c-6ab88900ba89.jpeg)
 
@@ -30,7 +30,7 @@ CI/CD enables organizations to ship software quickly and efficiently. CI/CD enab
 
 ![0_KB2oUiVeUuC_zlAc](https://user-images.githubusercontent.com/80678596/176105486-0cf75398-337b-420a-b6d9-321c1b476594.png)
 
-- ##### The benefit of CI/CD?
+- ### The benefit of CI/CD?
 
  - Smaller Code Changes
  - Fault Isolations
