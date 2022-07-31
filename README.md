@@ -1,4 +1,3 @@
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/NewthingAde/Building-CI-CD-Pipelines-Monitoring-Logging/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/NewthingAde/Building-CI-CD-Pipelines-Monitoring-Logging/tree/main)
 
 # Getting Started 
 - ### What Is Continuous Integration, Delivery and Deployment?
